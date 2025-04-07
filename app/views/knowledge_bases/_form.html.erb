@@ -1,0 +1,27 @@
+<%= form_with(model: knowledge_basis) do |form| %>
+  <% if knowledge_basis.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(knowledge_basis.errors.count, "error") %> prohibited this knowledge_basis from being saved:</h2>
+
+      <ul>
+        <% knowledge_basis.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :header, style: "display: block" %>
+    <%= form.text_field :header %>
+  </div>
+
+  <div>
+    <%= form.label :content, style: "display: block" %>
+    <%= form.rich_textarea :content %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

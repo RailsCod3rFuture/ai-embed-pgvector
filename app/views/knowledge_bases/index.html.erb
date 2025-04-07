@@ -1,0 +1,35 @@
+<% content_for :title, "CPG: Tech Knowledge" %>
+<div class="w-full">
+  <% if notice.present? %>
+  <p class="text-center" style="color: green"><%= notice %></p>
+  <% end %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">CPG KNOWLEDGE</h1>
+    <%= form_with url: knowledge_bases_path, method: :get, class: "flex space-x-2" do %>
+      <%= text_field_tag :q, params[:q], class: "rounded-md px-3.5 py-2.5 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" %>
+      <%= submit_tag "Search All Documents", class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+    <% end %>
+    <%= link_to "New Knowledge", new_knowledge_basis_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+  </div>
+
+  <hr>
+  <div id="knowledge-basis" class="min-w-full divide-y divide-gray-200 space-y-5">
+    <% if @knowledge_basis.any? %>
+      <% @knowledge_basis.each do |knowledge_base| %>
+        <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
+          <%= knowledge_base.header %>
+          <div class="w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2">
+            <%= link_to "Show", knowledge_base, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+            <%= link_to "Edit", edit_knowledge_basis_path(knowledge_base), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+            <div class="sm:inline-block">
+              <%= button_to "Remove Knowledge Base", knowledge_base, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-center my-10">No new knowledge found.</p>
+    <% end %>
+  </div>
+</div>

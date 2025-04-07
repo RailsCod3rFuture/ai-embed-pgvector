@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @knowledge_basis %>
+
+<div>
+  <%= link_to "Edit this knowledge basis", edit_knowledge_basis_path(@knowledge_basis) %> |
+  <%= link_to "Back to knowledge bases", knowledge_bases_path %>
+
+  <%= button_to "Destroy this knowledge basis", @knowledge_basis, method: :delete %>
+</div>
