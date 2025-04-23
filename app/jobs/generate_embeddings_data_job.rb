@@ -5,12 +5,14 @@ class GenerateEmbeddingsDataJob < ApplicationJob
     text_content = record.content.to_plain_text
     return if content.blank?
 
+    record.delete_all
+
     spliced_sentences = splice_sentences(text_content)
     sentence_chunks = group_sentences_by_word_count(spliced_sentences, 130) # 130 words per chunk
     sentence_chunks.each do |c|
       init_embedding = Embedding.get_embedding_text(c)
       next if init_embedding.blank?
-      Embedding.create_or_find_by!(resourceable: record, embedding: init_embedding, content: c)
+      Embedding.create!(resourceable: record, embedding: init_embedding, content: c)
     end
   end
 
