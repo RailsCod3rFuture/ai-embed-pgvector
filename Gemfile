@@ -31,6 +31,7 @@ gem "solid_cable"
 gem "ruby-openai"
 gem "pgvector"
 gem "neighbor"
+gem 'good_job'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
